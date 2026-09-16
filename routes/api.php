@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ConversionController;
+use App\Http\Controllers\Api\LeadsFinderController;
 use App\Http\Controllers\Api\LinkCheckerController;
 use App\Http\Controllers\Api\PdfToolController;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,8 @@ Route::prefix('v1')->middleware('throttle:tools')->group(function () {
     });
 
     Route::post('link-checker', [LinkCheckerController::class, 'check']);
+
+    Route::prefix('leads')->group(function () {
+        Route::post('search-queries', [LeadsFinderController::class, 'searchQueries']);
+    });
 });
